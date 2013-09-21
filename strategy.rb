@@ -6,8 +6,10 @@ extend Defensive
 
 def go!
   enemy = opponents.first
-  return fire_at!(enemy, line_of_site_to(enemy)) if can_fire_at?(enemy)
 
+  return fire_at! enemy if my.can_fire_at? enemy
+  return dodge(enemy) if enemy.can_fire_at?(me)   
+  return aim_at!(enemy) unless aiming_at?(enemy)
   rest
 end
 
