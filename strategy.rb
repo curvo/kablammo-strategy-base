@@ -9,10 +9,11 @@ def go!
   return hunt unless enemy            
 
   return fire_at! enemy if my.can_fire_at? enemy
+  return dodge(enemy) if enemy.can_fire_at?(me)   
+  return aim_at!(enemy) unless aiming_at?(enemy)
+
    # && my.ammo > 0
-  # return dodge(enemy) if enemy.can_fire_at?(me)   
   # return rest if my.ammo == 0
-  # return aim_at!(enemy) unless aiming_at?(enemy)
   # return move_towards!(enemy) if obscured?(enemy)
   # # return rest if my.ammo_full?
   rest
