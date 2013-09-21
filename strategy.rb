@@ -6,7 +6,8 @@ extend Defensive
 
 def go!
   enemy = opponents.first
-  return hunt unless enemy            
+  return hunt unless enemy
+  return rest unless my.ammo_full? && !enemy.can_fire_at?(me)            
   return dodge(enemy) if enemy.can_fire_at?(me) && my.armor < 2  
   return fire_at! enemy if my.can_fire_at? enemy
   return dodge(enemy) if enemy.can_fire_at?(me)   
@@ -15,7 +16,6 @@ def go!
    # && my.ammo > 0
   # return rest if my.ammo == 0
   # return move_towards!(enemy) if obscured?(enemy)
-  # # return rest if my.ammo_full?
   rest
 end
 
