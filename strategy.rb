@@ -7,6 +7,8 @@ extend Defensive
 def go!
   enemy = opponents.first
   return hunt unless enemy
+  return fire_at!(enemy) if aiming_at?(enemy)
+  return fire_at!(enemy, my.line_of_sight_to(enemy)) if can_fire_at?(enemy)
   return rest if (my.ammo == 0 && !enemy.can_fire_at?(me))
   return fire_at!(enemy, 10) if obscured?(enemy)
   return fire_at!(enemy) if can_fire_at?(enemy)
